@@ -378,6 +378,6 @@ const string &str;
 ```cpp
 Myclass::MyClass(int var)
     :some_var_(var),
-	 some_other_var_(var + 1） {
+     some_other_var_(var + 1) {
 }
 ```
