@@ -2,10 +2,10 @@
 
 ## 头文件
 
-### 1.`#define`保护
+### 1. `#define`保护
 命名格式为：`<PROJECT>_<PATH>_<FILE>_H_`（待定）
 
-### 2.头文件依赖
+### 2. 头文件依赖
 使用前置声明尽量减少头文件中`#include`的数量。例如：头文件中用到类`FILE`，但不需要访问`FILE`的声明，则头文件中只需前置声明`class File`，无需include头文件。
 
 以下情况可以做到使用类`Foo`而无需访问类的定义：
@@ -15,8 +15,22 @@
 
 注：不建议仅仅为了减少包含头文件就使用指针成员替代对象成员。
 
-### 3.函数参数顺序
+### 3. 函数参数顺序
 定义函数时，参数顺序为：输入参数在前，输出参数在后。
 
-### 4.包含文件的名称及次序
-项目内头文件应按照项目源代码目录树结构排列。
+### 4. 包含文件的名称及次序
+项目内头文件应按照项目源代码目录树结构排列，相同目录下头文件按字母序排列。
+
+例如：`src/foo/fooserver.cc`中包含头文件的次序如下：
+```cpp
+#include "foo/fooserver.h"  // 优先位置
+
+#include <sys/types.h>  // C系统文件
+#include <unistd.h>
+
+#include <hash_map>  // 库头文件
+#include <vector>
+
+#include "base/basictypes.h"  // 本项目内头文件
+#include "base/commandlineflags.h"
+```
