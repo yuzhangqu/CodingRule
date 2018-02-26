@@ -59,13 +59,13 @@ class MyClass {
 // 低效的实现
 for (int i = 0; i < 1000000; ++i) {
     Foo f;  // 构造函数和析构函数分别调用1000000次
-	f.DoSomething(i);
+    f.DoSomething(i);
 }
 
 // 更好的实现
 Foo f;
 for (int i = 0; i < 1000000; ++i) {
-	f.DoSomething(i);
+    f.DoSomething(i);
 }
 ```
 
@@ -94,11 +94,11 @@ for (int i = 0; i < 1000000; ++i) {
 class Foo {
 public:
     Foo(int f);
-	~Foo();
+    ~Foo();
 
 private:
     Foo(const Foo&);
-	void operator=(const Foo&);
+    void operator=(const Foo&);
 };
 ```
 
