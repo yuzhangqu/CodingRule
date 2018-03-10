@@ -48,6 +48,7 @@
 - `LONGLONG_MAX`：与`INT_MAX`相似。
 
 ## 二、格式
+每一项有详细的规则，嫌麻烦可以直接看代码示例。
 
 ### 1. 行长度
 - 每一行代码字符数不超过80个。
@@ -56,13 +57,12 @@
 - 只使用空格，每次缩进2个空格。设定编辑器将tab转为空格。
 
 ### 3. 函数声明与定义
-- 规则文字如下，不看字可以直接看代码示例;
-- 返回值、函数名和左圆括号在同一行；
-- 函数名和左圆括号间没有空格；
+- 返回值、函数名和`(`在同一行；
+- 函数名和`(`间没有空格；
 - 圆括号和参数间没有空格；
-- 右圆括号和左大括号间有一个空格；
-- 左大括号在最后一个参数同一行的末尾处；
-- 右大括号单独位于函数最后一行；
+- `)`和`{`间有一个空格；
+- `{`在最后一个参数同一行的末尾处；
+- `}`单独位于函数最后一行；
 - 函数声明和实现处的所有形参名称保持一致；
 - 形参尽可能对齐；
 - 缺省缩进为2个空格；
@@ -87,43 +87,73 @@ ReturnType ClassName::ReallyLongFunctionName(Type par_name1,
 
 // 函数头一个参数也放不下
 ReturnType ClassName::ReallyReallyReallyLongFunctionName(
-    Type par_name1,  // 第一个参数就换行应缩进4个空格
-    Type par_name2,
+    Type par_name1,          // 第一个参数就换行应缩进4个空格
+    Type par_name2,          // 后续参数与第一个参数对齐
     Type par_name3) const {  // const关键字跟最后一个参数同行
-  DoSomething();  // 代码的缩进还是2个空格
+  DoSomething();             // 代码的缩进还是2个空格
   ...
 }
 ```
 
 ### 4. 函数调用
-1. 尽量放在同一行；
-2. 如果一行放不下，可断为多行，后面每一行都和第一个实参对齐；
-3. 左圆括号后和右圆括号前不要留空格；
-4. 如果函数参数比较多，可以出于可读性的考虑每行只放一个参数；
-5. 如果函数名太长，可以将所有参数独立成行，保持4个空格缩进。
-
-### 5. 条件语句
-1. `if`和左圆括号间有一个空格；
-2. 右圆括号和左大括号间有一个空格；
-3. `else`与`if`的右大括号在同一行。
+- 尽量放在同一行；
+- 同一行放不下，可断为多行，后面每一行都和第一个实参对齐；
+- `(`后和`)`前不要留空格；
+- 如果函数参数比较多，可以出于可读性的考虑每行只放一个参数；
+- 如果函数名太长，可以将所有参数独立成行，保持4个空格缩进。
 
 ```cpp
+// 一般情况
+bool retval = DoSomething(argument1, argument2, argument3);
+
+// 参数较多，一行放不下
+bool retval = DoSomething(argument1,
+                          argument2,  // 后续参数与第一个参数对齐
+                          argument3,
+                          argument4);
+                          
+// 一个参数也放不下
+bool retval = DoSomethingThatRequiresALongFunctionName(
+    very_long_argument1,  // 第一个参数就换行应缩进4个空格
+    argument2,            // 后续参数与第一个参数对齐
+    argument3,
+    argument4);
+```
+
+### 5. 条件语句
+- `if`和`(`间有一个空格；
+- 圆括号和条件之间没有空格；
+- `)`和`{`间有一个空格；
+- `else`另起一行。
+
+```cpp
+//  条件语句
 if (condition) {
   ...
-} else {
+}
+else {
   ...
 }
 ```
 
 ### 6. 循环和`switch`语句
-1. 空循环应使用`{}`或`continue`，而不是简单的分号：
-2. `switch`语句中的`case`块可以使用大括号；
-3. `switch`语句总是要包含一个`default`。
+- 空循环体应使用`{}`，而不是简单的分号：
+- `switch`语句中的`case`块可以使用大括号；
+- `switch`语句总是要包含一个`default`块。
 
 ```cpp
+// 循环语句
+for (int i = 0; i < kSomeNumber; ++i) {
+  DoSomething();
+}
+
+// 空循环体
+for (int i = 0; i < kSomeNumber; ++i) {}
+
+// switch语句
 switch (var) {
-  case 0: {
-    ...
+  case 0: {  // 缩进2个空格
+    ...      // 再缩进2个空格
     break;
   }
   case 1: {
@@ -137,36 +167,83 @@ switch (var) {
 ```
 
 ### 7. 指针和引用表达式
-1. 句点`.`或箭头`->`前后不要有空格；
-2. 指针/地址操作符（`*`、`&`）后不要有空格；
-3. 声明指针或引用变量时，`*`和`&`与变量名紧挨。
+- 句点`.`或箭头`->`前后不要有空格；
+- 指针/地址操作符（`*`、`&`）后不要有空格；
+- 声明指针或引用变量时，`*`和`&`与变量名紧挨。
 
 ```cpp
+x = r.y;   // member access
+x = p->y;  // member access
+x = *p;    // dereference
+x = &y;    // reference
 char *c;
 const string &str;
 ```
 
 ### 8. 布尔表达式
-一个布尔表达式超过80字符，断行时逻辑操作符位于行尾。
-
-### 9. 函数返回值
-函数返回时不要使用圆括号。
-
-### 10. 预处理指令
-预处理指令不要缩进，从行首开始。
-
-### 11. 类格式
-1. 基类名尽量与子类名放在同一行；
-2. 关键字`public`、`protected`、`private`前缩进一个空格；
-3. 除第一个关键字外，其他关键字前空一行；
-4. 关键字后不要空行。
-
-### 12. 初始化列表
-构造函数初始化列表放在同一行或按四格缩进并排几行。
+- 一个布尔表达式超过80字符，断行时逻辑操作符位于行尾。
 
 ```cpp
+if (this_one_thing > this_other_thing &&  // 操作符位于结尾
+    a_third_thing == a_forth_thing) {     // 后续条件尽量与前面对齐
+  ...
+}
+
+### 9. 预处理指令
+- 你一般不会需要这项规则；
+- 预处理指令不要缩进，从行首开始。
+
+```cpp
+  ...
+  if (condition) {
+#if DISASTER_PENDING
+    DropEverything();
+#endif
+    BackToNormal();
+  }
+  ...
+```
+
+### 10. 类格式
+- 基类名尽量与子类名放在同一行；
+- 关键字`public`、`protected`、`private`前缩进一个空格；
+- 除第一个关键字外，其他关键字前空一行；
+- 关键字后不要空行。
+
+```cpp
+// 一个常规的类
+class MyClass::public OtherClass {
+ public:      // 注意这里是1个空格缩进
+  MyClass();  // 常规的2个空格缩进
+  explicit MyClass(int var);
+  ~MyClass() {}
+  
+  void SomeFunction();
+  void SomeFunctionThatDoesNothing() {
+  }
+  
+  void set_some_var(int var) { some_var_ = var; }  // 注意存取函数命名规则
+  int some_var() const { return some_var_; }       // 存取函数体可与函数头在同一行
+  
+ private:
+  bool SomeInternalFunction();
+  
+  int some_var_;
+  int some_other_var_;
+};
+```
+
+### 11. 初始化列表
+- 构造函数初始化列表放在同一行或按四格缩进并排几行。
+
+```cpp
+// 一般情况
+MyClass::MyClass(int var) : some_var_(var), some_other_var_(var + 1) {
+}
+
+// 一行放不下
 Myclass::MyClass(int var)
-    :some_var_(var),
+    :some_var_(var),  // 4个空格缩进
      some_other_var_(var + 1) {
 }
 ```
