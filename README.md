@@ -188,6 +188,7 @@ if (this_one_thing > this_other_thing &&  // 操作符位于结尾
     a_third_thing == a_forth_thing) {     // 后续条件尽量与前面对齐
   ...
 }
+```
 
 ### 9. 预处理指令
 - 你一般不会需要这项规则；
