@@ -1,73 +1,99 @@
 # C++编程规范（精简版）
 
-## 命名约定
+## 一、命名约定
 
 ### 1. 通用命名规则
-- 函数命名、变量命名、文件命名应具有描述性，不要过度缩写。
-- 类型和变量应该是名词，如：`FileOpener`、`num_errors`。
-- 函数名通常是指令性的，如：`OpenFile()`、`set_num_errors()`。
-- 除非放到项目外也非常明了，否则不要使用缩写。
+- 函数命名、变量命名、文件命名应具有描述性，不要过度缩写；
+- 类型（`FileOpener`）和变量（`num_errors`）应该是名词；
+- 函数名通常是指令性的，如：`OpenFile()`；
+- 谨慎使用缩写，除非该缩写大部分人都非常明了。
 
 ### 2. 文件命名
-- 文件名要全部小写，可以包含下划线`_`和短线`-`，如：`my_useful_class.cc`。
-- C++文件以`.cc`结尾，头文件以`.h`结尾。
+- 文件名要全部小写，可以包含下划线`_`和短线`-`，如：`my_useful_class.cc`;
+- C++文件以`.cc`结尾，头文件以`.h`结尾;
 - 定义类时文件名一般成对出现，如：`foo_bar.h`和`foo_bar.cc`对应类`FooBar`。
 
 ### 3. 类型命名
-- 类型命名每个单词以大写字母开头，不包含下划线，如：`MyExcitingClass`。
+- 类型命名每个单词以大写字母开头，不包含下划线，如：`MyExcitingClass`;
 - 类型命名规则适用于：类、结构体、`typedef`、枚举。
 
 ### 4. 变量命名
-- 变量名一律小写，单词间以下划线相连，如：`my_exciting_local_variable`。
-- 类的成员变量以下划线结尾，如：`my_exciting_member_variable_`。
-- 结构体的数据成员可以和普通变量一样，不用以下划线结尾。
-- 全局变量少用，可以以`g_`作为前缀与局部变量区分。
+- 变量名一律小写，单词间以下划线相连，如：`my_exciting_local_variable`;
+- 类的成员变量以下划线结尾，如：`my_exciting_member_variable_`;
+- 结构体的数据成员可以和普通变量一样，不用以下划线结尾;
+- 谨慎使用全局变量，如果必须要用，以`g_`作为前缀与局部变量区分。
 
 ### 5. 常量命名
-在名称前加`k`，如；`const int kDaysInAWeek = 7;`
+- 在名称前加`k`，如：`const int kDaysInAWeek = 7;`
 
 ### 6. 函数命名
-- 普通函数：函数名以大写字母开头，每个单词首字母大写，没有下划线，如：`DeleteUrl()`。
-- 存取函数：函数名要与存取的变量名匹配，如`num_entries_`对应的存取函数：`num_entries()`和`set_num_entries(int num_entries)`。
+- 普通函数：函数名以大写字母开头，每个单词首字母大写，没有下划线，如：`DeleteUrl()`;
+- 存取函数：函数名要与存取的变量名匹配，如`num_entries_`对应的存取函数：`num_entries()`和`set_num_entries(int num_entries)`;
 - 短小的内联函数名也可以使用小写字母。
 
-### 7. 命名空间
-命名空间的名称是全小写的，其命名基于项目名称和目录结构。
+### 7. 枚举命名
+- 枚举名称属于类型名称，规则参见第3条，如：`UrlTableErrors`;
+- 枚举值应全部大写，单词间以下划线`_`相连。
 
-### 8. 枚举命名
-- 枚举名称属于类型名称，因此大小写混合，如：`UrlTableErrors`。
-- 枚举值应全部大写，单词间以下划线相连。
+### 8. 宏命名
+- 谨慎使用宏，如果必须要用，其命名像枚举值一样全部大写，使用下划线`_`相连。
 
-### 9. 宏命名
-如果绝对要用，其命名像枚举命名一样全部大写，使用下划线相连。
+### 9. 命名空间
+- 命名空间的名称是全小写的，其命名基于项目名称和目录结构。
 
 ### 10. 命名规则外
 当命名与现有C/C++实体相似的对象时，可参考现有命名约定：
-- `bigopen()`：参考`open()`；
-- `sparse_hash_map`：STL相似实体，参考STL命名约定；
-- `LONGLONG_MAX`：类似`INT_MAX`。
+- `bigopen()`：与`open()`相似；
+- `sparse_hash_map`：与STL相似；
+- `LONGLONG_MAX`：与`INT_MAX`相似。
 
-## 格式
+## 二、格式
 
 ### 1. 行长度
-每一行代码字符数不超过80个。
+- 每一行代码字符数不超过80个。
 
 ### 2. 空格 vs. Tab
-只使用空格，每次缩进2个空格。设定编辑器将tab转为空格。
+- 只使用空格，每次缩进2个空格。设定编辑器将tab转为空格。
 
 ### 3. 函数声明与定义
-1. 返回值、函数名和左圆括号在同一行；
-2. 函数名和左圆括号间没有空格；
-3. 圆括号和参数间没有空格；
-4. 右圆括号和左大括号间有一个空格；
-5. 左大括号在最后一个参数同一行的末尾处；
-6. 右大括号单独位于函数最后一行；
-7. 函数声明和实现处的所有形参名称保持一致；
-8. 形参尽可能对齐；
-9. 缺省缩进为2个空格；
-10. 独立封装的参数保持4个空格缩进；
-11. 如果函数为`const`的，关键字`const`应与最后一个参数位于同一行；
-12. 如果有些参数没有用到，在函数定义处将参数名注释起来。如：`void Circle::Rotate(double /*radians*/) {}`。
+- 规则文字如下，不看字可以直接看代码示例;
+- 返回值、函数名和左圆括号在同一行；
+- 函数名和左圆括号间没有空格；
+- 圆括号和参数间没有空格；
+- 右圆括号和左大括号间有一个空格；
+- 左大括号在最后一个参数同一行的末尾处；
+- 右大括号单独位于函数最后一行；
+- 函数声明和实现处的所有形参名称保持一致；
+- 形参尽可能对齐；
+- 缺省缩进为2个空格；
+- 独立封装的参数保持4个空格缩进；
+- 如果函数为`const`的，关键字`const`应与最后一个参数位于同一行；
+- 如果有些参数没有用到，在函数定义处将参数名注释起来。如：`void Circle::Rotate(double /*radians*/) {}`。
+
+```cpp
+// 一般情况
+ReturnType ClassName::FunctionName(Type par_name1, Type par_name2) {
+  DoSomething();
+  ...
+}
+
+// 函数头所在行只能放下第一个参数
+ReturnType ClassName::ReallyLongFunctionName(Type par_name1,
+                                             Type par_name2,
+                                             Type par_name3) {
+  DoSomething();
+  ...
+}
+
+// 函数头一个参数也放不下
+ReturnType ClassName::ReallyReallyReallyLongFunctionName(
+    Type par_name1,  // 换行的参数应缩进4个空格
+    Type par_name2,
+    Type par_name3) const {  // const关键字跟最后一个参数同行
+  DoSomething();  // 代码的缩进还是2个空格
+  ...
+}
+```
 
 ### 4. 函数调用
 1. 尽量放在同一行；
@@ -238,14 +264,14 @@ class MyClass {
 ```cpp
 // 低效的实现
 for (int i = 0; i < 1000000; ++i) {
-    Foo f;  // 构造函数和析构函数分别调用1000000次
-    f.DoSomething(i);
+  Foo f;  // 构造函数和析构函数分别调用1000000次
+  f.DoSomething(i);
 }
 
 // 更好的实现
 Foo f;
 for (int i = 0; i < 1000000; ++i) {
-    f.DoSomething(i);
+  f.DoSomething(i);
 }
 ```
 
@@ -273,12 +299,12 @@ for (int i = 0; i < 1000000; ++i) {
 ```cpp
 class Foo {
 public:
-    Foo(int f);
-    ~Foo();
+  Foo(int f);
+  ~Foo();
 
 private:
-    Foo(const Foo&);
-    void operator=(const Foo&);
+  Foo(const Foo&);
+  void operator=(const Foo&);
 };
 ```
 
@@ -321,8 +347,8 @@ private:
 ```cpp
 class MyClass {
 public:
-    void Analyze(const string &text);
-    void Analyze(const char *text, size_t textlen);
+  void Analyze(const string &text);
+  void Analyze(const char *text, size_t textlen);
 };
 ```
 
