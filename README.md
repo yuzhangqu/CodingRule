@@ -79,7 +79,7 @@ ReturnType ClassName::FunctionName(Type par_name1, Type par_name2) {
 
 // 函数头所在行只能放下第一个参数
 ReturnType ClassName::ReallyLongFunctionName(Type par_name1,
-                                             Type par_name2,
+                                             Type par_name2,  // 后续参数与第一个参数对齐
                                              Type par_name3) {
   DoSomething();
   ...
@@ -87,7 +87,7 @@ ReturnType ClassName::ReallyLongFunctionName(Type par_name1,
 
 // 函数头一个参数也放不下
 ReturnType ClassName::ReallyReallyReallyLongFunctionName(
-    Type par_name1,  // 换行的参数应缩进4个空格
+    Type par_name1,  // 第一个参数就换行应缩进4个空格
     Type par_name2,
     Type par_name3) const {  // const关键字跟最后一个参数同行
   DoSomething();  // 代码的缩进还是2个空格
